@@ -20,7 +20,8 @@ const Rooms = ({ match }) => {
 };
 
 function Room({ match }) {
-    return <h2>{`${match.params.roomId}`} 방을 선택하셨습니다.</h2>
+    return <h2>{`${match.params.roomId}`}
+     방을 선택하셨습니다.</h2>
 }
 
 export default Rooms;
