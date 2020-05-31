@@ -158,36 +158,21 @@ printLog(1, 2, 3); // [1, 2, 3]
 (() => {
     function Something() {
         this.value = 1;
-        const interVal = setInterval(() => {
-            // 화살표 함수를 사용했기 때문에 this는 setInterval의 동작과는 상관없이 obj를 참조한다.
-            this.value++;
-            console.log(this.value);
-        }, 1000);
+        this.repeat = () => {
+            const interVal = setInterval(() => {
+                // 화살표 함수를 사용했기 때문에 this는 setInterval의 동작과는 상관없이 obj를 참조한다.
+                this.value++;
+                console.log(this.value);
+            }, 1000);
 
-        setTimeout(function() {
-            clearInterval(interVal);
-        }, 10000);
+            setTimeout(function() {
+                clearInterval(interVal);
+            }, 10000);
+        }
+
+        
     }
-    const obj = new Something();
+    // const obj = new Something();
+    // obj.repeat();
 })();
-
-// (() => {
-    
-// })();
-
-// (() => {
-    
-// })();
-
-// (() => {
-    
-// })();
-
-// (() => {
-    
-// })();
-
-// (() => {
-    
-// })();
 
