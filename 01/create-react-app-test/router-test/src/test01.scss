@@ -1,0 +1,47 @@
+.test01{
+    *{
+        box-sizing: border-box;
+    }
+    &_row{
+        display: flex;
+        justify-content: row;
+    }
+
+    &_col{
+        flex:1 1 0;
+        text-align: center;
+        font-size: 0;
+    }
+
+    &_head{
+        p{
+            font-size: 16px;
+        }
+    }
+
+    &_body{
+        button, input {
+            display: inline-block;
+            width: 80%;
+            height: 30px;
+            font-size: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+       .totalCost{
+            font-size: 16px;
+       }
+    }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

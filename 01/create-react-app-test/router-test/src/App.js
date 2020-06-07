@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Rooms from './Rooms';
+import test01 from './test01';
 import './test/Study';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div style={{ padding: 20, border: '5px solid gray' }}>
+        <div style={{ padding: 20, border: '5px solid #f1f1f1' }}>
           <Link to="/">홈</Link>
           <br />
           <Link to="/photo">사진</Link>
           <br />
           <Link to="/rooms">방 소개</Link>
           <br />
+          <Link to="/test01">테스트</Link>
+          <br />
           <Route exact path="/" component={Home} />
           <Route path="/photo" component={Photo} />
           <Route path="/rooms" component={Rooms} />
+          <Route path="/test01" component={test01} />
         </div>
       </BrowserRouter>
     );
