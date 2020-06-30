@@ -1,5 +1,7 @@
 // 프로미스 사용 시 주의할 점
 
+import test01 from "../test01";
+
  /**
   * return 키워드 깜빡하지 않기
   * 
@@ -144,3 +146,7 @@
             .catch(error => console.log(error));
     }
 })();
+
+export default function PromiseStudy4() {
+    console.log('export test01')
+}

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Rooms from './Rooms';
 import test01 from './test01';
-import './test/Study';
 
 class App extends Component {
   render() {

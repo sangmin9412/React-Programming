@@ -40,12 +40,13 @@ const dataList = [
     }
 ];
 
-console.log(dataList);
+// console.log(dataList);
 let costArr = [];
+let cost = 0;
 for (let i = 0; i < dataList.length; i++) {
     costArr[i] = 0;
 }
-const inputKeyUpHandler = (e, price) => {
+const inputChangeHandler = (e, price) => {
     const index = e.target.dataset.index;
     let count = e.target.value ? e.target.value : 0;
     if(isNaN(parseInt(e.target.value))) {
@@ -55,18 +56,14 @@ const inputKeyUpHandler = (e, price) => {
 
     price *= count;
     costArr[index] = price;
-    // console.log(count);
-    // console.log(index);
-    // console.log(costArr);
-    // console.log(costArr[index]);
-}
 
-const costHandler = (e) => {
-    let cost = 0;
+    cost = 0;
     for (let i = 0; i < costArr.length; i++) {
         cost += costArr[i];
     }
-    e.currentTarget.innerHTML = cost;
+
+    const totalCost = document.querySelector('.totalCost');
+    totalCost.innerHTML = cost;
 }
 
 function test01 () {
@@ -98,7 +95,7 @@ function test01 () {
                     <div className="test01_row">
                         {
                             dataList.map((data, index) => {
-                                return <p className="test01_col" key={index} ><input type="text" data-index={index} onKeyUp={(e) => inputKeyUpHandler(e, data.price)} placeholder="" /></p>
+                                return <p className="test01_col" key={index} ><input type="text" data-index={index} onChange={(e) => inputChangeHandler(e, data.price)} placeholder="" /></p>
                             })
                         }
                         {/* <p className="test01_col"><input type="text" placeholder="숫자를 입력 하세요." /></p>
@@ -112,7 +109,7 @@ function test01 () {
                         <p className="test01_col"><input type="text" placeholder="숫자를 입력 하세요." /></p>
                         */}
                         <p className="test01_col">
-                            <button onClick={costHandler}>Click!</button>
+                            <span className="totalCost">0</span>
                         </p>
                     </div>
                 </div>
