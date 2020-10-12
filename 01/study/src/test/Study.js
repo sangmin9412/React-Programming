@@ -18,7 +18,9 @@
 // 템플릿 리터럴로 동적인 문자열 생성하기
 import './template_literals';
 
-
+// 실행을 멈출 수 있는 제너레이터
+// import './generator1'; // 실행을 멈출 수 있는 제너레이터
+import './generator2'; // 제너레이터 활용하기
 
 
 
