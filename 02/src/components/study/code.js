@@ -123,3 +123,50 @@ export const code351 = `class MyComponent extends Component {
     domNode.removeEventListener('dragstart', this.onDragStart);
   }
 }`;
+
+export const code352 = `class ErrorBoundary extends Component {
+  state = { error: null }
+
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+
+  componentDidCatch(error, info) {
+    sendErrorToServer(error, info);
+  }
+
+  render() {
+    const { error } = this.state;
+    if (error) {
+      return <div>{error.toString()}</div>;
+    }
+    return this.props.children;
+  }
+}`;
+
+export const code353 = `class Counter extends Component {
+  state = { count: 0 }
+
+  onClick = () => {
+    const { count } = this.state;
+    this.setState({ count: count + 1 });
+  }
+
+  render() {
+    const { count } = this.state;
+    if (count >= 3) {
+      throw new Error('에러 발생!!!');
+    }
+    return (
+      <div onClick={this.onClick}>{\`클릭하세요\${count}\`}</div>
+    );
+  }
+}
+
+function App() {
+  return (
+    <ErrorBoundary>
+      <Counter />
+    </ErrorBoundary>
+  )
+}`;

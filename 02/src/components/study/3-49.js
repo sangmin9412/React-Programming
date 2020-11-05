@@ -1,10 +1,9 @@
 import React from 'react';
-import { code349 } from './code';
 
-function UserInfo349() {
+function UserInfo349({ code }) {
   return (
     <div>
-      <pre>{code349}</pre>
+      <pre>{code}</pre>
     </div>
   );
 }

@@ -38,5 +38,8 @@ module.exports = {
     'no-return-assign': 'off', // Arrow function should not return assignment no-return-assign
     'react/prefer-stateless-function': 'off', // 상탯값이 없는 컴포넌트를 클래스로 작성할 때 경고
     'max-len': 'off', // 너무 긴 글을 작성할 경우 개행 하도록 경고
+    'import/prefer-default-export': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
   },
 };

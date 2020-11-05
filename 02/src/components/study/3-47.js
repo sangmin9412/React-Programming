@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { code347 } from './code';
 
 class MyComponent347 extends Component {
   state = {
@@ -34,10 +33,11 @@ class MyComponent347 extends Component {
 
   render() {
     const { items } = this.state;
+    const { code } = this.props;
     return (
       <>
         <pre>
-          {code347}
+          {code}
         </pre>
         <button type="button" onClick={this.onClick}>추가하기</button>
         <div ref={this.divRef} style={{ width: '100%' }}>
