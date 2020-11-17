@@ -16,10 +16,15 @@ class Counter353 extends Component {
       throw new Error('에러 발생!!!');
     }
     return (
-      <ErrorBoundary>
+      <>
         <pre>{code}</pre>
-        <div onClick={this.onClick}>{`클릭하세요${count}`}</div>
-      </ErrorBoundary>
+        <ErrorBoundary>
+          <div onClick={this.onClick}>{`클릭하세요${count}`}</div>
+        </ErrorBoundary>
+        <p style={{ marginTop: 20 }}>
+          <em>create-react-app 을 사용했을 경우에는 따로 처리를 해줘야 하는 것으로 생각됨.</em>
+        </p>
+      </>
     );
   }
 }

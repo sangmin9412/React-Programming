@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 
 class ErrorBoundary extends Component {
-  state = { error: null }
+  state = {
+    error: null,
+  }
 
   static getDerivedStateFromError(error) {
+    console.log('getDerivedStateFromError - ');
     return { error };
   }
 
   componentDidCatch(error, info) {
+    console.log('componentDidCatch - ');
     // sendErrorToServer(error, info);
   }
 
@@ -15,7 +19,7 @@ class ErrorBoundary extends Component {
     const { error } = this.state;
     const { children } = this.props;
     if (error) {
-      return <div>{error.toString()}</div>;
+      return <div>{error && error.toString()}</div>;
     }
     return children;
   }

@@ -41,5 +41,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
+    'import/no-cycle': 'off',
+    'react/no-unused-state': 'off', // 사용되지 않는 멤버 필드 경고
   },
 };

@@ -170,3 +170,348 @@ function App() {
     </ErrorBoundary>
   )
 }`;
+
+export const code354 = `onClick = () => {
+  this.setState({ name: 'mike });
+  throw new Error('some error');
+  this.setState({ age: 20 });
+}`;
+
+export const code355 = `onClick = () => {
+  try {
+    this.setState({ name: 'mike });
+    throw new Error('some error');
+    this.setState({ age: 20 });
+  } catch (e) {
+    // ... 상탯값 롤백
+  }
+}`;
+
+export const code356 = `class App extends Component {
+  render() {
+    return (
+      <div>
+        <div>상단 메뉴</div>
+        <Profile username="mike" />
+        <div>하단 메뉴</div>
+      </div>
+    );
+  }
+}
+
+function Profile({ username }) {
+  return (
+    <div>
+      <Greeting username={username} />
+      {/* ... */}
+    </div>
+  );
+}
+
+function Greeting({ username }) {
+  return <p>{\`\${username}님 안녕하세요\`}</p>
+}`;
+
+export const code357 = `const UserContext = createContext('unknown');
+
+class App extends Component {
+  render() {
+    const { code } = this.props;
+    return (
+      <div>
+        <UserContext.Provider value="mike">
+          <div>상단 메뉴</div>
+          <Profile />
+          <div>하단 메뉴</div>
+        </UserContext.Provider>
+      </div>
+    );
+  }
+}
+
+function Profile() {
+  return (
+    <div>
+      <Greeting />
+      {/* ... */}
+    </div>
+  );
+}
+
+function Greeting() {
+  return (
+    <UserContext.Consumer>
+      {username => <p>\`\${username}님 안녕하세요\`</p>}
+    </UserContext.Consumer>
+  );
+}`;
+
+export const code359 = `class App extends Component {
+  state = {
+    username: '',
+  };
+
+  onChangeName = (e) => {
+    const username = e.target.value;
+    this.setState({ username });
+  };
+
+  render() {
+    const { username } = this.state;
+    return (
+      <div>
+        <UserContext.Provider value={username}>
+          <Profile />
+        </UserContext.Provider>
+        <input type="text" value={username} onChange={this.onChangeName} />
+      </div>
+    );
+  }
+}
+
+class Profile extends PureComponent {
+  render() {
+    return (
+      <Greeting />
+    );
+  }
+} 
+
+function Greeting() {
+  return (
+    <UserContext.Consumer>
+      {username => <p>{\`\${username}님 안녕하세요\`}</p>}
+    </UserContext.Consumer>
+  );
+}`;
+
+export const code360 = `const UserContext = createContext('unknown');
+const ThemeContext = createContext('dark');
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <ThemeContext.Provider value="light">
+          <UserContext.Provider value="mike">
+            <div>상단 메뉴</div>
+            <Profile />
+            <div>하단 메뉴</div>
+          </UserContext.Provider>
+        </ThemeContext.Provider>
+      </div>
+    );
+  }
+}
+
+function Profile() {
+  return (
+    <div>
+      <Greeting />
+    </div>
+  );
+}
+
+function Greeting() {
+  return (
+    <ThemeContext.Consumer>
+      {(theme) => (
+        <UserContext.Consumer>
+          {(username) => (
+            <p
+              style={{ color: theme === 'dark' ? 'gray' : 'green' }}
+            >{\`\${username}님 안녕하세요\`}
+            </p>
+          )}
+        </UserContext.Consumer>
+      )}
+    </ThemeContext.Consumer>
+  );
+}
+
+export default App;
+`;
+
+export const code361 = `const ThemeContext = createContext('dark');
+
+class MyComponent extends Component {
+  componentDidMount() {
+    const theme = this.context;
+    console.log(theme);
+  }
+
+  // ...
+}
+
+MyComponent.contextType = ThemeContext;
+`;
+
+export const code362 = `const UserContext = createContext('unknown);
+const ThemeContext = createContext('dark);
+
+class MyComponent extends Component {
+  componentDidMount() {
+    const { username, theme } = this.props;
+    // ...
+  }
+  // ...
+}
+
+export default props => (
+  <UserContext.Consumer>
+    {(username) => (
+      <ThemeContext.Consumer>
+        {(theme) => <MyComponent username={username} theme={theme} />}
+      </ThemeContext.Consumer>
+    )}
+  </UserContext.Consumer>
+);`;
+
+export const code363 = `const UserContext = createContext({
+  username: 'unknown',
+  helloCount: 0,
+  onHello: () => {},
+});
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: 'mike',
+      helloCount: 0,
+      onHello: this.onHello,
+    };
+  }
+
+  onHello = () => {
+    const { helloCount } = this.state;
+    this.setState({ helloCount: helloCount + 1 });
+  }
+
+  render() {
+    return (
+      <div>
+        <UserContext.Provider value={this.state}>
+          <div>상단 메뉴</div>
+          <Profile />
+          <div>하단 메뉴</div>
+        </UserContext.Provider>
+      </div>
+    );
+  }
+}
+
+function Profile() {
+  return (
+    <Greeting />
+  );
+}
+
+function Greeting() {
+  return (
+    <UserContext.Consumer>
+      {(value) => (
+        <>
+          <p>{\`\${value.username}님 안녕하세요\`}</p>
+          <p>{\`인사 횟수: \${value.helloCount}\`}</p>
+          <button type="button" onClick={value.onHello}>인사하기</button>
+        </>
+      )}
+    </UserContext.Consumer>
+  );
+}`;
+
+export const code365 = `const UserContext = createContext({ name: 'unknown' });
+
+class MyComponent extends Component {
+  // ...
+  onChangeName = (e) => {
+    const name = e.target.value;
+    this.setState({ name });
+  };
+  render() {
+    const { name } = this.state;
+    return (
+      <div>
+        <UserContext.Provider value={{ name }}>
+          {/* ... */}
+        </UserContext.Provider>
+      </div>
+    );
+  }
+}`;
+
+export const code366 = `class MyComponent extends Component {
+  state = {
+    userContextValue: {
+      name: 'unknown',
+    }
+  }
+  onChangeName = (e) => {
+    const name = e.target.value;
+    this.setState({ userContextValue: { name } });
+  };
+  render() {
+    const { userContextValue } = this.state;
+    return (
+      <div>
+        <UserContext.Provider value={userContextValue}>
+          {/* ... */}
+        </UserContext.Provider>
+      </div>
+    );
+  }
+}`;
+
+export const code358 = `const UserContext = createContext('unknown');
+
+class MyComponent extends Component {
+  render() {
+    return (
+      <div>
+        <UserContext.Provider value={userContextValue}>
+          {/* ... */}
+        </UserContext.Provider>
+        <Profile />
+      </div>
+    );
+  }
+}`;
+
+export const code367 = `class TextInput extends Component {
+  textRef = createRef();
+
+  componentDidMount() {
+    this.setTextFocus();
+  }
+
+  setTextFocus() {
+    this.textRef.current.focus();
+  }
+
+  render() {
+    return (
+      <div>
+        <input type="text" ref={this.textRef} />
+        <button type="button">저장</button>
+      </div>
+    );
+  }
+}`;
+
+export const code368 = `class Form extends Component {
+  textInputRef = createRef();
+
+  onClick = () => {
+    this.textInputRef.current.setTextFocus();
+  };
+
+  render() {
+    return (
+      <div>
+        <TextInput ref={this.textInputRef} />
+        <button type="button" onClick={this.onClick}>텍스트로 이동</button>
+      </div>
+    );
+  }
+}`;

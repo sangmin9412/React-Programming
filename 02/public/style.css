@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+html {
+  font-size: 14px;
+}
 li {
   list-style: none;
 }
@@ -20,11 +23,23 @@ pre {
   border: 1px solid #ddd;
   border-radius: 3px;
   overflow: auto;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 0.8rem;
 }
-h2 {
+p {
+  font-size: 1rem;
+}
+
+.link-title.home,
+.link-title.first {
   margin: -10px -13px 5px -10px;
+  border-top: 0;
+}
+.link-title {
+  margin: 10px -13px 5px -10px;
   padding: 10px;
   font-size: 18px;
+  border-top: 1px solid #f3f1f3;
   border-bottom: 1px solid #f3f1f3;
 }
 

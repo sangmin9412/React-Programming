@@ -7,37 +7,46 @@ import Description from './Description';
 import Title from './Title';
 import { sData } from './study/data';
 
-console.log(sData);
+const listData = sData.reduce((prev, v) => prev = [
+  ...prev,
+  ...v.data,
+], []);
 
 const AppLayout = ({ children }) => (
   <Router>
     <div className="wrapper">
       <nav className="navigation box-style">
-        <h2>Link</h2>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          {sData.map((v) => (
-            <li><Link to={v.path}>{v.title}</Link></li>
-          ))}
-        </ul>
+        {/* <h2 className="link-title home"><Link to="/">Home</Link></h2> */}
+        {
+          sData.map((v, i) => (
+            <div key={v.title}>
+              {v.title && <h2 className={i === 0 ? 'link-title first' : 'link-title'}>{v.title}</h2>}
+              <ul>
+                {v.data.map((c) => (
+                  <li key={c.path}><Link to={c.path}>{c.title}</Link></li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
       </nav>
       <div className="container box-style">
         <Switch>
           <Route path="/" exact>
             {children}
           </Route>
-          {sData.map((v) => (
-            <Route path={v.path} exact>
+          {listData.map((v) => (
+            <Route path={v.path} key={v.path} exact>
               <Title title={v.title} />
-              <Content content={v.content} />
+              {v.content && <Content content={v.content} />}
             </Route>
           ))}
         </Switch>
       </div>
       <Switch>
-        {sData.map((v) => (
-          <Route path={v.path} exact>
-            <Description desc={v.desc} />
+        {listData.map((v) => (
+          <Route path={v.path} key={v.path} exact>
+            {v.desc && <Description desc={v.desc} />}
           </Route>
         ))}
       </Switch>
